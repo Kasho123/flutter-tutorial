@@ -30,6 +30,47 @@ class RandomWordsState extends State<RandomWords> {
   final _saved = Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
+  void _openSandBox() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Add a new Dog'),
+        ),
+        body: new Container(
+          child: new Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 32.0,
+            ),
+            child: new Column(
+              children: [
+                new Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: new TextField(
+                      decoration: new InputDecoration(
+                    labelText: 'Name the Pup',
+                  )),
+                ),
+                new Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: new Builder(
+                    builder: (context) {
+                      return new RaisedButton(
+                        onPressed: () => print('PRESSED'),
+                        color: Colors.indigoAccent,
+                        child: new Text('Submit Pup'),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }));
+  }
+
   void _pushSaved() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -119,6 +160,7 @@ class RandomWordsState extends State<RandomWords> {
         title: Text('Startup Name Generator Text'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+          IconButton(icon: Icon(Icons.text_fields), onPressed: _openSandBox),
         ],
       ),
       body: _buildSuggestions(),
